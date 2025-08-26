@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="siteHeader(title)">
+    <header class="header">
+        <div class="header-container">
+            <button class="hamburger" aria-label="Toggle menu" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="/" class="logo">
+                <h1 class="logo">Schedule Share</h1>
+            </a>
+            <nav class="header-nav">
+                <a href="/pages/dashboard" title="Dashboard">📊</a>
+                <a href="/login" class="icon-button-mypage" title="로그인">👤</a>
+            </nav>
+        </div>    
+    </header>
+</div>
+
+<script>
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    
+    if (sidebar) {
+        sidebar.classList.toggle('open');
+        
+        // Create/remove overlay for mobile
+        if (sidebar.classList.contains('open')) {
+            if (!overlay) {
+                const newOverlay = document.createElement('div');
+                newOverlay.className = 'sidebar-overlay';
+                newOverlay.onclick = () => toggleSidebar();
+                document.body.appendChild(newOverlay);
+            }
+        } else {
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>

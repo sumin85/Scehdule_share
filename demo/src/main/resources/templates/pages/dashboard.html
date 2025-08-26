@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: html">
+<body>
+<div th:fragment="content">
+    <section>
+        <h1>Dashboard</h1>
+        <p>서버 렌더링 페이지 예시입니다. React와 동일한 스타일이 적용됩니다.</p>
+        
+        <!-- React-like dashboard grid -->
+        <div class="dashboard">
+            <div class="column">
+                <div class="card">
+                    <h3>📅 캘린더</h3>
+                    <div class="placeholder" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; border-radius: 4px; color: #999;">
+                        캘린더 영역
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="card">
+                    <h3>📋 오늘의 일정</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">회의 - 오후 2시</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">프로젝트 리뷰 - 오후 4시</li>
+                        <li style="padding: 8px 0;">저녁 약속 - 오후 7시</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🔔 알림</h3>
+                    <p style="color: #666;">새로운 알림이 없습니다.</p>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="card">
+                    <h3>👥 친구 일정</h3>
+                    <div class="placeholder" style="height: 60px; background: #eee; border-radius: 4px; margin: 8px 0;"></div>
+                    <div class="placeholder" style="height: 60px; background: #eee; border-radius: 4px; margin: 8px 0;"></div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="card">
+                    <h3>📊 통계</h3>
+                    <p style="font-size: 2rem; color: #78509D; text-align: center; margin: 20px 0;">12</p>
+                    <p style="text-align: center; color: #666;">이번 주 일정</p>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="card">
+                    <h3>⚙️ 설정</h3>
+                    <p style="color: #666;">빠른 설정 바로가기</p>
+                    <div style="margin-top: 16px;">
+                        <a href="/pages/settings" style="color: #78509D; text-decoration: none;">설정 페이지로 이동 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alternative: Simple card grid -->
+        <div class="card-grid" style="margin-top: 3rem;">
+            <div class="card">
+                <h3>추가 카드 1</h3>
+                <p>React와 동일한 카드 스타일이 적용됩니다.</p>
+            </div>
+            <div class="card">
+                <h3>추가 카드 2</h3>
+                <p>반응형 그리드로 구성되어 있습니다.</p>
+            </div>
+            <div class="card">
+                <h3>추가 카드 3</h3>
+                <p>모바일에서도 잘 보입니다.</p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

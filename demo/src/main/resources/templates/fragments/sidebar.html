@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="siteSidebar(activeMenu)">
+    <aside class="sidebar" aria-label="사이드바">
+        <nav class="sidebar-nav">
+            <a href="/" class="side-item" th:classappend="${activeMenu}=='home' ? ' active'" title="홈">
+                🏠
+            </a>
+            <a href="/pages/dashboard" class="side-item" th:classappend="${activeMenu}=='dashboard' ? ' active'" title="캘린더">
+                📅
+            </a>
+            <a href="/pages/friends" class="side-item" th:classappend="${activeMenu}=='friends' ? ' active'" title="친구">
+                👥
+            </a>
+            <a href="/pages/notifications" class="side-item" th:classappend="${activeMenu}=='notifications' ? ' active'" title="알림">
+                🔔
+            </a>
+            <a href="/pages/settings" class="side-item" th:classappend="${activeMenu}=='settings' ? ' active'" title="설정">
+                ⚙️
+            </a>
+        </nav>
+    </aside>
+</div>
+</body>
+</html>
