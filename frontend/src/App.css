@@ -1,0 +1,1088 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+body{
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #FDF8FF;
+}
+
+
+.header{
+  position: sticky;
+  top: 0;
+  background-color: #78509D;
+  border-bottom: 1px solid #ddd;
+  z-index: 1100;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container{
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 33px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #78509D;
+}
+
+.header-container .logo{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color:#fff;
+  background-color: #78509D;
+}
+
+.header-container .icon-button-mypage{
+  background: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background-color: #78509D;
+}
+
+
+.dashboard{
+  max-width: 1238px;
+  margin: 1rem 130px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+}
+
+.tab-navigation {
+  max-width: 1200px;
+  margin: 1rem auto 0;
+  padding: 0 1rem;
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button:hover {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.tab-button.active {
+  background: #007bff;
+  color: white;
+  font-weight: 600;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #0056b3;
+}
+
+.dashboard-grid {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .tab-navigation {
+    margin: 0.5rem auto 0;
+    padding: 0 0.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0 auto 1rem;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.calendar {
+  width: 100%;
+}
+
+.calendar .fc {
+  width: 100%;
+}
+
+.card{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #78509D;
+}
+
+h3{
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.card li{
+  list-style: none;
+}
+
+.card .placeholder{
+  flex: 1;
+  border: 2px dashed #ccc;
+  border-radius:4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 2rem;
+}
+
+.friends-schedules .item{
+  height: 1rem;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.group-updates .item{
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.group-updates .item input[type="checkbox"]{
+  margin-right: 0.5rem;
+}
+
+.login-container {
+  min-height: calc(100vh - var(--header-h)); /* 헤더 높이 제외한 화면 가득 */
+  display: flex;
+  align-items: center;   /* 세로 중앙 */
+  justify-content: center; /* 가로 중앙 */
+  padding: 24px 16px;   /* 모바일 안전 여백 */
+}
+
+.login-page {
+  width: 100%;
+  max-width: 640px;                 /* 카드 최대 너비 */
+  min-height: auto;                 /* 100vh 제거 */
+  padding: 32px 40px;               /* 카드 내부 패딩 (기존 빈 값 수정) */
+  margin: 0;                        /* 외부 마진 제거 (센터는 .login-container가 담당) */
+  background-color: #EFE7F6;        /* 연보라 배경 */
+  border: 1px solid #e2d6f7;        /* 연한 보라 테두리 */
+  border-radius: 16px;              /* 둥근 모서리 */
+  box-shadow: 0 10px 24px rgba(120, 80, 157, 0.18); /* 그림자 */
+}
+
+.login-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5b2e8f;
+  margin: 0 0 12px;
+}
+
+/* 얇은 구분선 */
+.login-page .divider {
+  width: 60%;              /* 목업 요구에 맞춰 더 짧게 */
+  height: 1px;
+  background: #cdb6ef;     /* 더 옅은 보라 */
+  margin: 10px auto 24px;  /* 가운데 정렬 */
+  border-radius: 1px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 440px;   /* 폼 폭 제한 */
+  margin: 0 auto;     /* 폼 중앙 정렬 */
+  background: #EFE7F6;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-group{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-form label{
+  font-size: 0.95rem;
+  color: #8a6bb3;     /* 연보라 텍스트 */
+  font-weight: 600;
+}
+
+.login-form input{
+  width: 100%;                 /* 입력/버튼 동일 폭(중간값) */
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border: 1px solid #cdb6ef;  /* 목업처럼 연한 보라 경계 */
+  border-radius: 8px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  margin-left: auto;          /* 가운데 정렬 */
+  margin-right: auto;
+  box-sizing: border-box;
+  background: #fff;
+  min-height: 44px;   /* 일관 높이 */
+}
+
+.login-form input::placeholder{
+  color: #9c86c6;     /* 목업처럼 연한 보라 */
+}
+
+.login-form input:focus{
+  outline: none;
+  border-color: #6f46a6;
+  box-shadow: 0 0 0 3px rgba(111, 70, 166, 0.12);
+}
+
+.login-page .sub-links {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
+  gap: 16px;
+  margin: 8px 0 16px;
+  background-color: #efe7f6;
+}
+
+.login-page .social-buttons{
+  display : flex;
+  gap: 16px;                   /* 간격 확장 */
+  justify-content: center;
+  align-items: center;
+  background-color: #efe7f6;
+}
+
+.login-page .social-buttons button{
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;           /* 원형 버튼 */
+  background: #d9c9f0;          /* 연한 보라 톤 */
+  color: #5b2e8f;
+  border: 1px solid #cdb6ef;
+}
+
+.login-page .social-buttons button:hover{
+  background: #bfa5ea;
+  color: #fff;
+}
+
+.login-page .social-title{
+  text-align: center;
+  color: #7d63ad;
+  font-size: 0.95rem;
+  margin: 8px 0 10px;
+}
+
+.login-page .submit-button{
+  width: 90%;                  /* 입력과 동일 폭(중간값) */
+  padding: 12px 16px;
+  background: #78509D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;           /* 버튼 모서리 둥글게 */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: block;
+  margin: 8px auto 0;           /* 가운데 정렬 */
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;                 /* 카드 최대 너비 */
+  min-height: auto;                 /* 100vh 제거 */
+  padding: 32px 40px;               /* 카드 내부 패딩 (기존 빈 값 수정) */
+  margin: 24px auto;                /* 수평 중앙 정렬 */
+  align-self: center;               /* 부모가 flex일 때도 중앙 유지 */
+  background-color: #EFE7F6;        /* 연보라 배경 */
+  border: 1px solid #e2d6f7;        /* 연한 보라 테두리 */
+  border-radius: 16px;              /* 둥근 모서리 */
+  box-shadow: 0 10px 24px rgba(120, 80, 157, 0.18); 
+}
+
+.register-container h2{
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #5b2e8f;
+}
+
+.register-container .register-form button{
+  width: 90%;
+  padding: 12px 16px;
+  background: #78509D;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Register page divider (same as login) */
+.register .divider{
+  width: 60%;
+  height: 1px;
+  background: #cdb6ef;
+  margin: 10px auto 24px;
+  border-radius: 1px;
+}
+
+/* Register form layout like login */
+.register-form{
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: #EFE7F6;
+}
+
+/* Inputs: same visual as login */
+.register-form input{
+  width: 95%;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border: 1px solid #cdb6ef;
+  border-radius: 8px;
+  margin: 6px auto;
+  box-sizing: border-box;
+  background: #fff;
+  min-height: 44px;
+}
+
+.register-form input:focus{
+  outline: none;
+  border-color: #7b5bb6;
+  box-shadow: 0 0 0 3px rgba(123, 91, 182, 0.12);
+}
+
+/* Labels and placeholder colors */
+.register-form label{
+  font-size: 0.95rem;
+  color: #8a6bb3;
+  font-weight: 600;
+}
+
+.register-form input::placeholder{
+  color: #9c86c6;
+}
+
+/* 마이페이지 스타일 */
+.mypage {
+  min-height: 100vh;
+  background-color: #FDF8FF;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.myapge .mypage-title{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 0;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+.mypage .user-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #EFE7F6;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mypage .user-info p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+}
+
+.mypage .user-info strong {
+  color: #333;
+  font-weight: 600;
+
+}
+
+.mypage .user-avatar {
+  margin-bottom: 20px;
+
+}
+
+.mypage .logout-section {
+  text-align: center;
+}
+
+.mypage-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fefefe;
+}
+
+/* 프로필 섹션 */
+.profile-section {
+  text-align: center;
+  padding: 40px 20px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: relative;
+}
+
+.user-avatar {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: block;
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  align-items: center;
+}
+
+
+
+.profile-name {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-email {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* 네비게이션 탭 */
+.profile-tabs {
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1;
+  padding: 16px 20px;
+  text-align: center;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.tab:hover {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.tab.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+  background: #f8f9ff;
+}
+
+/* 컨텐츠 섹션 */
+.content-section {
+  padding: 60px 20px;
+  min-height: 300px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-message {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* 로그아웃 섹션 */
+.logout-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #78509D);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+.logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(154, 130, 180S  , 0.4);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .mypage {
+    padding: 10px;
+  }
+  
+  .mypage-container {
+    margin: 0 10px;
+  }
+  
+  .profile-section {
+    padding: 30px 15px 25px;
+  }
+  
+  .avatar-image,
+  .avatar-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+  }
+  
+  .tab {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .content-section {
+    padding: 40px 15px;
+  }
+}
+/* ===== Dashboard Grid Layout ===== */
+.dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;             /* 큰 캘린더 : 우측 두 칼럼 */
+  grid-template-areas:
+    "calendar right right"
+    "bottom1 bottom2 bottom3";
+  gap: 24px;
+  padding: 0;
+}
+
+/* 각 column을 영역에 매핑 (DOM 순서 기준) */
+.dashboard > .column:nth-child(1) { grid-area: calendar; }
+.dashboard > .column:nth-child(2) { 
+  grid-area: right; 
+  display: grid; 
+  gap: 16px; 
+  align-content: start; 
+}
+.dashboard > .column:nth-child(3) { grid-area: bottom1; }
+.dashboard > .column:nth-child(4) { grid-area: bottom2; }
+.dashboard > .column:nth-child(5) { grid-area: bottom3; }
+
+/* 카드 공통 여백/그림자 (이미 .card가 있다면 보강 정도만) */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(120, 80, 157, 0.15);
+  padding: 16px;
+}
+
+/* 캘린더 영역 카드 크게 */
+.dashboard > .column:nth-child(1) .card {
+  min-height: 420px;
+  padding: 20px;
+}
+
+/* 우측 스택 카드 높이 */
+.dashboard > .column:nth-child(2) .card {
+  min-height: 120px;
+}
+
+/* 하단 3열 카드 최소 높이 */
+.dashboard > .column:nth-child(3) .card,
+.dashboard > .column:nth-child(4) .card,
+.dashboard > .column:nth-child(5) .card {
+  min-height: 160px;
+}
+
+/* 섹션 타이틀 스타일 (카드 안의 h3) */
+.card h3 {
+  margin: 0 0 12px;
+  font-weight: 600;
+  color: #5b2e8f;
+}
+
+/* 구분선 느낌(오른쪽 상단 섹션 사이 선) — 선택사항 */
+.dashboard > .column:nth-child(2) .card + .card {
+  border-top: 1px dashed #d7c3f1;
+}
+
+/* FullCalendar 톤 맞추기 — 선택사항 */
+.fc {
+  --fc-border-color: #e8def8;
+}
+.fc .fc-toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background: #f4ebff;
+}
+.fc .fc-button-primary {
+  background: #6f46a6;
+  border-color: #6f46a6;
+}
+.fc .fc-button-primary:hover {
+  background: #5b2e8f;
+  border-color: #5b2e8f;
+}
+
+/* 반응형: 900px 이하에서 1열 → 2열로 축소 */
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "calendar"
+      "right"
+      "bottom1"
+      "bottom2"
+      "bottom3";
+  }
+}
+
+/* ===== Left Sidebar Layout ===== */
+:root {
+  --header-h: 72px;   /* Header 높이 (필요시 조정) */
+  --sidebar-w: 72px;  /* Sidebar 너비 */
+}
+
+.app-main {
+  display: flex;
+  /* 고정 사이드바 영역만큼 좌측 패딩 확보 */
+  padding-left: var(--sidebar-w);
+  min-height: calc(100vh - var(--header-h));
+}
+
+.sidebar {
+  position: fixed;              /* 스크롤에도 고정 */
+  top: 0;                       /* 헤더와의 여백 제거: 최상단부터 시작 */
+  left: 0;
+  height: 100vh;                /* 화면 높이 가득 */
+  width: var(--sidebar-w);
+  background: #efe7fb;
+  border-right: 1px solid #e2d6f7;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  z-index: 1000; /* 헤더 아래, 콘텐츠 위 */
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 20px;
+}
+
+.side-item {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #827D87;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-size: 22px; /* icon size */
+}
+
+.side-item:hover {
+  background: #e9defb;
+  box-shadow: 0 6px 16px rgba(120, 80, 157, 0.18);
+}
+
+.side-item.active {
+  border-bottom: 3px solid #78509D;
+  color: #78509D;
+}
+
+.app-content {
+  flex: 1;
+  padding: 24px;
+  /* 사이드바와 시각적 분리용 선택사항 */
+  /* max-width: calc(100% - var(--sidebar-w)); */
+}
+
+@media (max-width: 720px) {
+  .sidebar { width: 56px; }
+  :root { --sidebar-w: 56px; }
+  .app-content { padding: 16px; }
+}
+
+/* ================= MySchedule (개인 일정) ================= */
+.my-schedule{
+  padding: 48px;
+  gap: 35px
+}
+
+.my-schedule .calendar-card{
+  background: #EFE7F6;
+  border: 1px solid #e2d6f7;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(120, 80, 157, 0.12);
+  padding: 16px;
+}
+
+.my-schedule .calendar-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.my-schedule .icon-btn{
+  border: 1px solid #cdb6ef;
+  background: #d9c9f0;
+  color: #5b2e8f;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+/* 하단 3열 */
+.my-schedule .list-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.my-schedule .list-section h4{
+  margin: 0 0 8px;
+  color: #5b2e8f;
+  font-weight: 700;
+}
+
+.my-schedule .list-section .card{
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  padding: 12px;
+}
+
+.my-schedule .schedule-placeholder{
+  height: 64px;
+  border: 2px dashed #cdb6ef;
+  border-radius: 12px;
+  background: #eFE9fb; /* 아주 연한 보라 */
+  margin: 10px 0;
+}
+
+/* 플로팅 추가 버튼 */
+.my-schedule .floating-add{
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #cdb6ef;
+  background: #bfa5ea;
+  color: #fff;
+  font-size: 28px;
+  line-height: 0;
+}
+
+/* 반응형 */
+@media (max-width: 960px){
+  .my-schedule .list-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= Friends Page ================= */
+.friends-page{
+  padding: 32px;
+}
+
+.friends-top{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Chips (친구 요청 / 친구 목록) */
+.friends-chips{ display: flex; gap: 12px; margin-bottom: 12px; }
+.friends-chips .chip{
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: 10px; min-width: 220px;
+  padding: 10px 12px; border-radius: 12px;
+  background: #fff; border: 1px solid #cdb6ef; color: #5b2e8f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.friends-chips .chip.outline{
+  background: #fbf8ff; border-style: dashed;
+}
+.friends-chips .count-badge{
+  padding: 2px 8px; border-radius: 999px;
+  background: #d7c6f1; color: #4a2c7a; font-size: 12px; font-weight: 700;
+}
+
+/* Calendar card */
+.friends-page .calendar-card{
+  background: #EFE7F6; border: 1px solid #e2d6f7; border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(120, 80, 157, 0.12);
+  padding: 16px;
+}
+.friends-page .calendar-header{
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+}
+.friends-page .calendar-header h3{ margin:0; color:#5b2e8f; font-weight:700; }
+.friends-page .icon-btn{
+  border: 1px solid #cdb6ef; background: #d9c9f0; color:#5b2e8f;
+  width: 36px; height: 36px; border-radius: 8px;
+}
+
+/* Right panel: friend list */
+.friends-page .panel.card{
+  background:#fff; border-radius:12px; border:1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06); padding: 12px;
+}
+.friends-page .panel-header{
+  display:flex; gap:8px; align-items:center; padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.08);
+}
+.friends-page .panel-header .search{
+  flex:1; height: 36px; border-radius: 8px; border: 1px solid #cdb6ef; padding: 0 10px; background:#fbf8ff;
+}
+.friends-page .panel-body{ padding-top: 10px; max-height: 420px; overflow:auto; }
+.friends-page .friend-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.friends-page .friend-item.placeholder{
+  height: 56px; border: 2px dashed #cdb6ef; border-radius: 12px; background: #efe9fb;
+}
+
+/* Bottom: group notifications */
+.friends-bottom{ margin-top: 20px; }
+.friends-bottom .section-title{ color:#5b2e8f; font-weight:700; margin-bottom: 10px; }
+.friends-bottom .noti-grid{
+  display:grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+}
+.friends-bottom .noti-card.placeholder{
+  height: 140px; border: 2px dashed #cdb6ef; border-radius: 12px; background:#fbf8ff;
+}
+
+/* Floating add button */
+.friends-page .floating-add{
+  position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px;
+  border-radius: 50%; border: 1px solid #cdb6ef; background: #bfa5ea; color: #fff;
+  font-size: 28px; line-height: 0;
+}
+
+/* Responsive */
+@media (max-width: 960px){
+  .friends-top{ grid-template-columns: 1fr; }
+  .friends-bottom .noti-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Hamburger (hidden on desktop) */
+.hamburger {
+  display: none;
+  width: 36px;
+  height: 28px;
+  padding: 0;
+  margin-right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  margin: 3px 0;
+}
+
+/* Overlay for mobile when sidebar open */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 900;
+}
+
+/* Off-canvas sidebar on small screens */
+@media (max-width: 900px) {
+  .app-main {
+    padding-left: 0; /* remove reserved sidebar space on mobile */
+  }
+
+  .hamburger {
+    display: inline-flex; /* show hamburger on small screens */
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 1001; /* above content */
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    z-index: 1200; /* above overlay and content, below header if needed */
+  }
+}
+
+/* Ultra-small devices: reduce paddings/margins/gaps */
+@media (max-width: 360px) {
+  .header-container { padding: 0.6rem 12px; }
+  .header-container .logo { font-size: 1.25rem; }
+  .app-content { padding: 12px; }
+
+  .tab-navigation { margin: 0.25rem auto 0; padding: 0 0.25rem; }
+  .tab-button { padding: 0.5rem 0.25rem; font-size: 0.85rem; }
+
+  .dashboard-grid { gap: 0.75rem; padding: 0.75rem 0.5rem; }
+  .dashboard { gap: 12px; }
+
+  .my-schedule { padding: 16px; }
+  .friends-page { padding: 16px; }
+
+  .login-container { padding: 16px 12px; }
+  .login-page, .register { padding: 20px; }
+
+  .hamburger { width: 30px; height: 24px; }
+  .hamburger span { width: 20px; }
+
+  /* Make cards slightly larger for better touch targets */
+  .card { padding: 16px; min-height: 180px; }
+  .dashboard-card { padding: 16px; min-height: 220px; }
+  .my-schedule .list-section .card { min-height: 180px; padding: 14px; }
+  .friends-page .panel.card { min-height: 160px; padding: 14px; }
+  .friends-bottom .noti-card.placeholder { height: 160px; }
+  .card h3 { font-size: 1.05rem; }
+}
+
+/* Narrow phones (<=390px): let card sections use more width */
+@media (max-width: 390px) {
+  .app-content { padding: 8px; }
+  .dashboard-grid { padding: 8px 6px; gap: 10px; }
+  .dashboard { gap: 10px; }
+  .tab-navigation { margin: 0; padding: 0 4px; }
+}
