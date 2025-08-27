@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import scheduleService from '../../services/scheduleService';
 
 const MySchedule = () => {
   const [schedules, setSchedules] = useState([]);
@@ -8,23 +9,21 @@ const MySchedule = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let alive = true;
-    (async () => {
-      try {
-        const res = await fetch('/api/friends-schedules');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        if (alive) setSchedules(Array.isArray(data) ? data : []);
-      } catch (e) {
-        if (alive) setError(e.message || 'Failed to load');
-      } finally {
-        if (alive) setLoading(false);
-      }
-    })();
-    return () => {
-      alive = false;
-    };
+    loadSchedules();
   }, []);
+
+  const loadSchedules = async () => {
+    try {
+      setLoading(true);
+      const data = await scheduleService.getAllSchedules();
+      setSchedules(Array.isArray(data) ? data : []);
+      setError(null);
+    } catch (e) {
+      setError(e.message || 'Failed to load schedules');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const today = new Date();
   const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -41,7 +40,7 @@ const MySchedule = () => {
   const todayList = useMemo(
     () =>
       schedules.filter((it) => {
-        const d = parseDate(it.date || it.startDate || it.start);
+        const d = parseDate(it.startTime);
         return d && d >= startOfToday && d < endOfToday;
       }),
     [schedules]
@@ -49,28 +48,53 @@ const MySchedule = () => {
   const weekList = useMemo(
     () =>
       schedules.filter((it) => {
-        const d = parseDate(it.date || it.startDate || it.start);
+        const d = parseDate(it.startTime);
         return d && d >= startOfToday && d < endOfWeek;
       }),
     [schedules]
   );
+
+  // 캘린더 이벤트 변환
+  const calendarEvents = useMemo(() => {
+    return schedules.map(schedule => ({
+      id: schedule.id,
+      title: schedule.title,
+      start: schedule.startTime,
+      end: schedule.endTime,
+      allDay: false,
+      backgroundColor: getPriorityColor(schedule.priority),
+      borderColor: getPriorityColor(schedule.priority),
+      textColor: '#fff'
+    }));
+  }, [schedules]);
+
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case 'HIGH': return '#ff4757';
+      case 'MEDIUM': return '#ffa502';
+      case 'LOW': return '#2ed573';
+      default: return '#78509D';
+    }
+  };
 
   const fmtDate = (d) =>
     new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
   const fmtTime = (d) => new Intl.DateTimeFormat('ko-KR', { hour: '2-digit', minute: '2-digit' }).format(d);
 
   const Item = ({ item }) => {
-    const d = parseDate(item.date || item.startDate || item.start);
-    const t = parseDate(item.time || item.startTime || item.start);
-    const name = item.title || item.name || item.schedule || '제목 없음';
+    const d = parseDate(item.startTime);
+    const name = item.title || '제목 없음';
     return (
       <li className="schedule-item">
         <div className="title">{name}</div>
         {d && (
           <div className="meta">
             <span className="date">{fmtDate(d)}</span>
-            <span className="time">{fmtTime(t || d)}</span>
+            <span className="time">{fmtTime(d)}</span>
           </div>
+        )}
+        {item.description && (
+          <div className="description">{item.description}</div>
         )}
       </li>
     );
@@ -82,6 +106,7 @@ const MySchedule = () => {
       <div className="section">
         <div className="card calendar-card">
           <div className="calendar-header">
+            <h3>📅 내 일정 캘린더</h3>
           </div>
           <FullCalendar
             plugins={[dayGridPlugin]}
@@ -89,10 +114,10 @@ const MySchedule = () => {
             height="auto"
             expandRows={true}
             handleWindowResize={true}
-            events={[
-              { title: '회의', date: '2025-08-17', allDay: true },
-              { title: '개발', date: '2025-08-18', allDay: true },
-            ]}
+            events={calendarEvents}
+            eventDisplay="block"
+            dayMaxEvents={3}
+            moreLinkClick="popover"
           />
         </div>
       </div>
@@ -111,7 +136,7 @@ const MySchedule = () => {
             ) : (
               <ul className="schedule-list">
                 {majorList.map((it, idx) => (
-                  <Item key={idx} item={it} />
+                  <Item key={it.id || idx} item={it} />
                 ))}
               </ul>
             )}
@@ -129,7 +154,7 @@ const MySchedule = () => {
             ) : (
               <ul className="schedule-list">
                 {todayList.map((it, idx) => (
-                  <Item key={idx} item={it} />
+                  <Item key={it.id || idx} item={it} />
                 ))}
               </ul>
             )}
@@ -147,7 +172,7 @@ const MySchedule = () => {
             ) : (
               <ul className="schedule-list">
                 {weekList.map((it, idx) => (
-                  <Item key={idx} item={it} />
+                  <Item key={it.id || idx} item={it} />
                 ))}
               </ul>
             )}

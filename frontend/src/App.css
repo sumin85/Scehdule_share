@@ -952,7 +952,6 @@ h3{
 .friends-page .calendar-header{
   display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
 }
-.friends-page .calendar-header h3{ margin:0; color:#5b2e8f; font-weight:700; }
 .friends-page .icon-btn{
   border: 1px solid #cdb6ef; background: #d9c9f0; color:#5b2e8f;
   width: 36px; height: 36px; border-radius: 8px;
@@ -1085,4 +1084,103 @@ h3{
   .dashboard-grid { padding: 8px 6px; gap: 10px; }
   .dashboard { gap: 10px; }
   .tab-navigation { margin: 0; padding: 0 4px; }
+}
+
+/* ================= Schedule Display Styles ================= */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.schedule-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+.schedule-item:hover {
+  background: #e9ecef;
+  border-color: #78509D;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(120, 80, 157, 0.15);
+}
+
+.schedule-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.priority-indicator {
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.schedule-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.schedule-details {
+  margin-left: 12px;
+}
+
+.schedule-time {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.schedule-description {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 4px 0;
+  line-height: 1.3;
+}
+
+.schedule-category {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #78509D;
+  background: #f4ebff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.schedule-placeholder {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+/* Responsive schedule styles */
+@media (max-width: 768px) {
+  .schedule-item {
+    padding: 10px;
+  }
+  
+  .schedule-title {
+    font-size: 0.9rem;
+  }
+  
+  .schedule-time {
+    font-size: 0.8rem;
+  }
+  
+  .schedule-description {
+    font-size: 0.75rem;
+  }
 }

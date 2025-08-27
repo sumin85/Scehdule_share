@@ -1,0 +1,181 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 2vw;
+}
+
+.modal-content {
+  background: white;
+  border-radius: clamp(8px, 1.2vw, 16px);
+  padding: 0;
+  width: clamp(320px, 85vw, 600px);
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 2vh 6vh rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(16px, 3vw, 24px);
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: clamp(20px, 3vw, 24px);
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: clamp(24px, 4vw, 30px);
+  height: clamp(24px, 4vw, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: #f0f0f0;
+}
+
+.schedule-form {
+  padding: clamp(16px, 3vw, 24px);
+}
+
+.form-group {
+  margin-bottom: clamp(16px, 2.5vw, 20px);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(12px, 2vw, 16px);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: clamp(4px, 0.8vw, 6px);
+  font-weight: 500;
+  color: #333;
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: clamp(8px, 1.5vw, 12px);
+  border: 1px solid #ddd;
+  border-radius: clamp(4px, 0.8vw, 6px);
+  font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 clamp(2px, 0.4vw, 3px) rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: clamp(60px, 10vw, 80px);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(8px, 1.5vw, 12px);
+  margin-top: clamp(20px, 3vw, 30px);
+  padding-top: clamp(16px, 2.5vw, 20px);
+  border-top: 1px solid #e5e5e5;
+}
+
+.cancel-button,
+.submit-button {
+  padding: clamp(8px, 1.5vw, 12px) clamp(16px, 2.5vw, 20px);
+  border-radius: clamp(4px, 0.8vw, 6px);
+  font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: clamp(80px, 12vw, 100px);
+}
+
+.cancel-button {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.cancel-button:hover {
+  background: #e9ecef;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 clamp(2px, 0.6vw, 4px) clamp(8px, 1.5vw, 12px) rgba(102, 126, 234, 0.3);
+}
+
+/* 세밀한 반응형 조정 */
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 4vw;
+  }
+  
+  .modal-content {
+    width: 92vw;
+    max-height: 90vh;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-content {
+    width: 50vw;
+    max-width: 700px;
+  }
+}
