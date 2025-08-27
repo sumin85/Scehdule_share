@@ -6,18 +6,6 @@ files:
     destination: /home/ubuntu/app
     overwrite: yes
 
-permissions:
-  - object: /home/ubuntu/app
-    pattern: "**"
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
-  - object: /home/ubuntu/app/scripts
-    pattern: "**"
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
-
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
