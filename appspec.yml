@@ -7,17 +7,31 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /
+  - object: /home/ubuntu/app
     pattern: "**"
     owner: ubuntu
     group: ubuntu
+    mode: 755
+  - object: /home/ubuntu/app/scripts
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
 
 hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
   AfterInstall:
     - location: scripts/stop.sh
       timeout: 60
       runas: ubuntu
   ApplicationStart:
     - location: scripts/start.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: scripts/stop.sh
       timeout: 60
       runas: ubuntu
