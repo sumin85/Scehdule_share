@@ -1,4 +1,3 @@
-@"
 #!/usr/bin/env bash
 
 PROJECT_ROOT=/home/ubuntu/app
@@ -25,4 +24,3 @@ else
         kill -9 $CURRENT_PID
     fi
 fi
-"@ | Out-File -FilePath "scripts\stop.sh" -Encoding UTF8
