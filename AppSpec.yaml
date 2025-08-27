@@ -14,6 +14,9 @@ permissions:
 
 hooks:
   BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 300
+      runas: root
     - location: scripts/install_dependencies.sh
       timeout: 600
       runas: root
