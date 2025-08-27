@@ -31,7 +31,7 @@ export JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+D
 echo "$TIME_NOW > 애플리케이션 시작 중..." >> $DEPLOY_LOG
 
 # JAR 파일 찾기 - 경로 수정
-JAR_FILE=$(find $PROJECT_ROOT -name "*.jar" -type f | head -1)
+JAR_FILE=$(find $PROJECT_ROOT -name "*.jar" -type f -not -path "*/gradle/wrapper/*" | head -1)
 
 if [ -z "$JAR_FILE" ]; then
     echo "$TIME_NOW > ERROR: JAR 파일을 찾을 수 없습니다" >> $DEPLOY_LOG
