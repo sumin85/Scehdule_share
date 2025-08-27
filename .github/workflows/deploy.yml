@@ -10,8 +10,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: scheduleshare-githubaction-s3-bucket
-  CODE_DEPLOY_APPLICATION_NAME: schedule-share-app
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: schedule-share-deployment-group
+  CODE_DEPLOY_APPLICATION_NAME: scheduleshare-codedeploy-app
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: scheduleshare-codedeploy-group
 
 permissions:
   contents: read
