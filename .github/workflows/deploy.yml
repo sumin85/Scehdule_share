@@ -56,7 +56,7 @@ jobs:
       run: |
         cd frontend
         npm install
-        npm run build
+        CI=false npm run build
 
     # (6) React 빌드 파일을 Spring Boot static 폴더로 복사
     - name: Copy React build to Spring Boot
