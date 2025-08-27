@@ -88,7 +88,37 @@ jobs:
           --s3-location s3://${{ env.S3_BUCKET_NAME }}/${{ github.sha }}.zip \
           --source .
 
-    # (10) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
+    # (10) 기존 배포 중지 (있는 경우)
+    - name: Stop existing deployment if any
+      run: |
+        # 진행 중인 배포 확인 및 중지
+        DEPLOYMENTS=$(aws deploy list-deployments \
+          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+          --include-only-statuses "InProgress" "Queued" "Ready" \
+          --query 'deployments[0]' \
+          --output text)
+        
+        if [ "$DEPLOYMENTS" != "None" ] && [ "$DEPLOYMENTS" != "" ]; then
+          echo "Stopping existing deployment: $DEPLOYMENTS"
+          aws deploy stop-deployment --deployment-id $DEPLOYMENTS --auto-rollback-enabled
+          
+          # 배포 중지 완료까지 대기 (최대 5분)
+          echo "Waiting for deployment to stop..."
+          for i in {1..30}; do
+            STATUS=$(aws deploy get-deployment --deployment-id $DEPLOYMENTS --query 'deploymentInfo.status' --output text)
+            if [ "$STATUS" = "Stopped" ] || [ "$STATUS" = "Failed" ]; then
+              echo "Deployment stopped with status: $STATUS"
+              break
+            fi
+            echo "Current status: $STATUS, waiting..."
+            sleep 10
+          done
+        else
+          echo "No active deployments found"
+        fi
+
+    # (11) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
     - name: Deploy to AWS EC2 from S3
       run: |
         aws deploy create-deployment \
