@@ -4,21 +4,24 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/app
-    overwirte: yes
+    overwrite: yes
 
-permissinos:
+permissions:
   - object: /
     pattern: "**"
-    user: ubuntu
+    owner: ubuntu
     group: ubuntu
 
 hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 600
+      runas: root
   AfterInstall:
     - location: scripts/stop.sh
       timeout: 60
       runas: ubuntu
   ApplicationStart:
     - location: scripts/start.sh
-      timeout: 60
+      timeout: 120
       runas: ubuntu
-    
