@@ -8,11 +8,11 @@ public class HomeController {
 
     @RequestMapping(value = {"/"})
     public String index() {
-        return "redirect:/index.html";
+        return "forward:/index.html";
     }
     
     @RequestMapping(value = {"/home", "/friends", "/notifications", "/settings"})
     public String spa() {
-        return "redirect:/index.html";
+        return "forward:/index.html";
     }
 }
