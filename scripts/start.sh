@@ -15,6 +15,7 @@ mkdir -p $PROJECT_ROOT/logs
 # 시스템 정리 먼저 실행
 echo "$TIME_NOW > 시스템 정리 먼저 실행..." >> $DEPLOY_LOG
 if [ -f /home/ubuntu/app/scripts/cleanup.sh ]; then
+    chmod +x /home/ubuntu/app/scripts/cleanup.sh
     /home/ubuntu/app/scripts/cleanup.sh
     if [ $? -ne 0 ]; then
         echo "$TIME_NOW > ERROR: cleanup.sh 실행 실패" >> $DEPLOY_LOG
